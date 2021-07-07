@@ -1,0 +1,89 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100px;
+  min-height: 100px;
+  max-height: 100px;
+  width: 100%;
+  min-width: 100%;
+  border: 1px solid black;
+}
+.heading {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.header-right {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.search-box {
+  height: 40px;
+  max-height: 40px;
+  width: 40%;
+  border: 1px solid black;
+}
+
+.add-btn {
+  height: 40px;
+  width: 40%;
+  border: 1px solid black;
+  background-color: blueviolet;
+}
+
+.main-container {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  flex-wrap: wrap;
+  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
+  max-height: calc(100vh - 100px);
+  width: 100%;
+  min-width: 100%;
+  overflow: hidden scroll;
+  padding: 20px;
+}
+
+.user-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100px;
+  min-height: 100px;
+  max-height: 100px;
+  width: 250px;
+  border: 1px solid black;
+  padding: 5px 10px;
+  margin: 5px 0px 0 5px;
+}
+
+.save-btn {
+  height: 40px;
+  width: 100%;
+  border: 1px solid black;
+  background-color: green;
+}
