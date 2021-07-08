@@ -32,6 +32,7 @@ export default function Header(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [confirmPwd, setConfirmPwd] = useState("");
   const { setSearch } = props;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,10 +51,18 @@ export default function Header(props) {
       fullName: fullName,
       Email: email,
     };
+    alert("New User Created");
     console.log(inputs);
+    setLnName("");
+    setFname("");
+    setEmail("");
+    setPassword("");
+    setError("");
+    setConfirmPwd("");
   };
 
   const confirmMatch = (value) => {
+    setConfirmPwd(value);
     if (value !== password) {
       setError("Passwords dont match");
     } else setError("");
@@ -90,55 +99,93 @@ export default function Header(props) {
               </TabList>
               <TabPanels p="2rem">
                 <TabPanel>
-                  <form>
+                  <form onSubmit={submit}>
                     <ModalBody pb={6}>
                       <FormControl>
-                        <FormLabel>Login name</FormLabel>
-                        <Input
-                          value={Lname}
-                          onChange={(e) => setLnName(e.target.value)}
-                          placeholder="Login name"
-                          required
-                        />
+                        <fieldset>
+                          <FormLabel>Login name</FormLabel>
+                          <Input
+                            value={Lname}
+                            onChange={(e) => setLnName(e.target.value)}
+                            placeholder="Login name"
+                            title="User name must be unique and must contain at least 1 character"
+                            required
+                          />
+                          <span className="msg">
+                            User name must be unique and must contain at least 1
+                            character
+                          </span>
+
+                          <abbr
+                            title="This field is mandatory"
+                            aria-label="required"
+                          >
+                            *
+                          </abbr>
+                        </fieldset>
                       </FormControl>
                       <FormControl mt={4}>
-                        <FormLabel>Full name</FormLabel>
-                        <Input
-                          value={fullName}
-                          onChange={(e) => setFname(e.target.value)}
-                          placeholder="Full name"
-                          required
-                        />
+                        <fieldset>
+                          <FormLabel>Full name</FormLabel>
+                          <Input
+                            value={fullName}
+                            onChange={(e) => setFname(e.target.value)}
+                            placeholder="Full name"
+                            title="User's full name(not more than 40 characteres)"
+                            maxlength="40"
+                          />
+                          <span className="msg">
+                            User's full name(not more than 40 characteres)
+                          </span>
+                        </fieldset>
                       </FormControl>
                       <FormControl mt={4}>
-                        <FormLabel>Email</FormLabel>
-                        <Input
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Email"
-                          required
-                        />
+                        <fieldset>
+                          <FormLabel>Email</FormLabel>
+                          <Input
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email"
+                          />
+                          <span className="msg">
+                            User's full name(not more than 40 characteres)
+                          </span>
+                        </fieldset>
                       </FormControl>
                       <FormControl mt={4}>
-                        <FormLabel>Password</FormLabel>
-                        <Input
-                          placeholder="Password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          type="password"
-                          required
-                          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                          title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                        />
+                        <fieldset>
+                          <FormLabel>Password</FormLabel>
+                          <Input
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            type="password"
+                            required
+                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                          />
+                          <span className="msg">
+                            Password must comply with the security rules defined
+                            by the system administrator
+                          </span>
+                        </fieldset>
                       </FormControl>
                       <FormControl mt={4}>
-                        <FormLabel>Confirm Password</FormLabel>
-                        <Input
-                          placeholder="Confirm password"
-                          type="password"
-                          onChange={(e) => confirmMatch(e.target.value)}
-                          required
-                        />
+                        <fieldset>
+                          <FormLabel>Confirm Password</FormLabel>
+                          <Input
+                            placeholder="Confirm password"
+                            type="password"
+                            value={confirmPwd}
+                            onChange={(e) => confirmMatch(e.target.value)}
+                            required
+                          />
+                          <span className="msg">
+                            {" "}
+                            Password must comply with the security rules defined
+                            by the system administrator
+                          </span>
+                        </fieldset>
                       </FormControl>
                       <div style={{ color: "red" }}>{error}</div>
                       <FormControl mt={4}>
@@ -156,7 +203,7 @@ export default function Header(props) {
 
                     <ModalFooter>
                       <FormControl>
-                        <button className="save-btn" onClick={submit}>
+                        <button className="save-btn" type="submit">
                           Save
                         </button>
                       </FormControl>
